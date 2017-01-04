@@ -10,13 +10,13 @@ SHELL_OBJS   = bin/shell_arg.o bin/shell.o bin/dir.o bin/rb_tree_misc.o bin/rb_t
 ifeq ($(LC_OS_NAME), cygwin)
 CYGWIN_CCFLAGS = -largp
 else
-CYGWIN_CCFLAGS = 
+CYGWIN_CCFLAGS =
 endif
 
 ifeq ($(LC_OS_NAME), darwin)
 APPLE_CCFLAGS = -I/usr/local/opt/openssl/include
 else
-APPLE_CCFLAGS = 
+APPLE_CCFLAGS =
 endif
 
 ifneq ($(ver), debug)
@@ -78,26 +78,26 @@ pcs4-dev : pre bin/libpcs.so $(SHELL_OBJS)
 
 .PHONY : install
 install:
-	cp ./bin/pcs /usr/local/bin
+	cp ./bin/pcs ./build
 
 .PHONY : uninstall
 uninstall:
-	rm /usr/local/bin/pcs
+	rm ./build/pcs
 
 .PHONY : install4-dev
 install4-dev:
-	mkdir /usr/local/include/pcs
-	cp ./pcs/*.h /usr/local/include/pcs/
-	cp ./bin/libpcs.so /usr/local/lib/
-	cp ./bin/pcs /usr/local/bin
+	mkdir ./build/include/pcs
+	cp ./pcs/*.h ./build/include/pcs/
+	cp ./bin/libpcs.so ./build/lib/
+	cp ./bin/pcs ./build/bin
 	ldconfig
 
 .PHONY : uninstall4-dev
 uninstall4-dev:
-	rm /usr/local/bin/pcs
-	rm /usr/local/lib/libpcs.so
-	rm /usr/local/include/pcs/*.h
-	rm -r /usr/local/include/pcs
+	rm ./build/bin/pcs
+	rm ./build/lib/libpcs.so
+	rm ./build/include/pcs/*.h
+	rm -r ./build/include/pcs
 	ldconfig
 
 .PHONY : clean
